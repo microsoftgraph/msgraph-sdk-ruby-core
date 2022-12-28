@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+require_relative 'microsoft_graph_core/version_information'
+require_relative 'microsoft_graph_core/graph_client_factory'
+require_relative 'microsoft_graph_core/graph_client_options'
+require_relative 'microsoft_graph_core/graph_request_adapter_base'
+require_relative 'microsoft_graph_core/middleware/telemetry_handler'
+
+module MicrosoftGraphCore
+
+end
