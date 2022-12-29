@@ -9,7 +9,7 @@ module MicrosoftGraphCore
 				client_options = MicrosoftGraphCore::GraphClientOptions.new
 			end
 			if client.nil?
-				client = MicrosoftGraphCore::GraphClientFactory::get_default_http_client(client_options)
+				client = MicrosoftGraphCore::GraphClientFactory::get_default_http_client(nil, [client_options])
 			end
 			super(authentication_provider, parse_node_factory, serialization_writer_factory, client)
 		end

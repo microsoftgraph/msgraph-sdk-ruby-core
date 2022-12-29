@@ -8,12 +8,22 @@ require_relative '../version_information'
 module MicrosoftGraphCore
 	module Middleware
 		class TelemetryHandler < Faraday::Middleware
-			def initialize(app = nil, options = MicrosoftGraphCore::GraphClientOptions.new)
-				if options.nil? then
-                    raise ArgumentError, 'options cannot be nil'
+			@@default_option = GraphClientOptions.new
+			def call(request_env)
+				request_option = request_env[:request][:context][@@default_option.get_key] unless request_env[:request].nil? || request_env[:request][:context].nil?
+                request_option = @@default_option if request_option.nil?
+				header_value = get_header_value(request_option)
+                unless header_value.nil? || header_value.empty? || request_env[:request_headers].nil? then
+                    request_env[:request_headers]["SdkVersion"] = header_value
+                    request_env[:request_headers]["client-request-id"] = SecureRandom.uuid
                 end
-                #assigning options isn't necessary as the parent constructor does it
-                super(app, options)
+                @app.call(request_env) unless app.nil?
+            end
+
+			def get_header_value(options)
+				if options.nil? then
+					options = GraphClientOptions.new
+				end
 				service_version_prefix = ""
 				unless options.graph_service_library_version.nil? || options.graph_service_library_version.empty? then
 					service_version_prefix = "graph-ruby"
@@ -32,16 +42,8 @@ module MicrosoftGraphCore
 				unless RbConfig::CONFIG["ruby_version"].nil? || RbConfig::CONFIG["ruby_version"].empty? then
 					feature_suffix += " runtimeEnvironment=" + RbConfig::CONFIG["ruby_version"] + ";"
 				end
-				@header_value = service_version_prefix + "graph-ruby-core/" + MicrosoftGraphCore::VersionInformation::VERSION + feature_suffix
+				return service_version_prefix + "graph-ruby-core/" + MicrosoftGraphCore::VersionInformation::VERSION + feature_suffix
 			end
-			def call(request_env)
-				
-                unless @header_value.nil? || @header_value.empty? || request_env[:request_headers].nil? then
-                    request_env[:request_headers]["SdkVersion"] = @header_value
-                    request_env[:request_headers]["client-request-id"] = SecureRandom.uuid
-                end
-                @app.call(request_env) unless app.nil?
-            end
 		end
 	end
 end
