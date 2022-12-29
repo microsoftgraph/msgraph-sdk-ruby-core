@@ -36,9 +36,9 @@ module MicrosoftGraphCore
 			end
 			def call(request_env)
 				
-                unless @header_value.nil? || @header_value.empty? || request_env[:headers].nil? then
-                    request_env[:headers]["SdkVersion"] = @header_value
-                    request_env[:headers]["client-request-id"] = SecureRandom.uuid
+                unless @header_value.nil? || @header_value.empty? || request_env[:request_headers].nil? then
+                    request_env[:request_headers]["SdkVersion"] = @header_value
+                    request_env[:request_headers]["client-request-id"] = SecureRandom.uuid
                 end
                 @app.call(request_env) unless app.nil?
             end

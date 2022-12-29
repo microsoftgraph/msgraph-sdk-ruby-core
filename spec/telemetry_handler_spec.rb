@@ -5,10 +5,10 @@ RSpec.describe MicrosoftGraphCore do
 		handler = MicrosoftGraphCore::Middleware::TelemetryHandler.new(nil, MicrosoftGraphCore::GraphClientOptions.new)
 		env = {
 			url: URI.parse("https://graph.microsoft.com/v1.0/users"),
-			headers: Faraday::Utils::Headers.new
+			headers: Faraday::Utils::request_headers.new
 		}
 		handler.call(env)
-		expect(env[:headers]["client-request-id"]).to include("-") #guids have dashes
+		expect(env[:request_headers]["client-request-id"]).to include("-") #guids have dashes
 	end
 
 	it "adds a service info" do
@@ -18,14 +18,14 @@ RSpec.describe MicrosoftGraphCore do
 		handler = MicrosoftGraphCore::Middleware::TelemetryHandler.new(nil, options)
 		env = {
 			url: URI.parse("https://graph.microsoft.com/v1.0/users"),
-			headers: Faraday::Utils::Headers.new
+			headers: Faraday::Utils::request_headers.new
 		}
 		handler.call(env)
-		expect(env[:headers]["SdkVersion"]).to include("graph-ruby-v1.0")
-		expect(env[:headers]["SdkVersion"]).to include("/1.0.0")
-		expect(env[:headers]["SdkVersion"]).to include("hostOS=")
-		expect(env[:headers]["SdkVersion"]).to include("hostArch=")
-		expect(env[:headers]["SdkVersion"]).to include("runtimeEnvironment=")
-		expect(env[:headers]["SdkVersion"]).to include("graph-ruby-core")
+		expect(env[:request_headers]["SdkVersion"]).to include("graph-ruby-v1.0")
+		expect(env[:request_headers]["SdkVersion"]).to include("/1.0.0")
+		expect(env[:request_headers]["SdkVersion"]).to include("hostOS=")
+		expect(env[:request_headers]["SdkVersion"]).to include("hostArch=")
+		expect(env[:request_headers]["SdkVersion"]).to include("runtimeEnvironment=")
+		expect(env[:request_headers]["SdkVersion"]).to include("graph-ruby-core")
 	end
 end
