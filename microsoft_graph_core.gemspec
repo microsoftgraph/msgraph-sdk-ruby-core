@@ -31,10 +31,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency 'microsoft_kiota_abstractions', '~> 0.11.0'
-  spec.add_runtime_dependency 'microsoft_kiota_faraday', '~> 0.8.0'
-  spec.add_runtime_dependency 'microsoft_kiota_serialization', '~> 0.6.0'
-  spec.add_runtime_dependency 'microsoft_kiota_authentication_oauth', '~> 0.4.0'
+  spec.add_runtime_dependency 'microsoft_kiota_abstractions', '~> 0.12.0'
+  spec.add_runtime_dependency 'microsoft_kiota_faraday', '~> 0.9.0'
+  spec.add_runtime_dependency 'microsoft_kiota_serialization', '~> 0.7.0'
+  spec.add_runtime_dependency 'microsoft_kiota_authentication_oauth', '~> 0.5.0'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency "rspec", "~> 3.0"
 end
