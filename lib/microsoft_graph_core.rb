@@ -4,6 +4,8 @@ require_relative 'microsoft_graph_core/graph_client_factory'
 require_relative 'microsoft_graph_core/graph_client_options'
 require_relative 'microsoft_graph_core/graph_request_adapter_base'
 require_relative 'microsoft_graph_core/middleware/telemetry_handler'
+require_relative 'microsoft_graph_core/authentication/oauth_access_token_provider'
+require_relative 'microsoft_graph_core/authentication/oauth_authentication_provider'
 
 module MicrosoftGraphCore
 
