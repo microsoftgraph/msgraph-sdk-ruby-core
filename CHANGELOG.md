@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+## [0.3.0] - 2023-03-28
+
+### Changed
+
+- Upgraded kiota dependencies
+
 ## [0.2.0] - 2023-01-09
 
 ### Added
