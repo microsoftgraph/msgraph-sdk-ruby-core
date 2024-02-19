@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'microsoft_kiota_abstractions', '~> 0.14.0'
-  spec.add_runtime_dependency 'microsoft_kiota_faraday', '>= 0.12', '< 0.15'
+  spec.add_runtime_dependency 'microsoft_kiota_faraday', '>= 0.12', '< 0.16'
   spec.add_runtime_dependency 'microsoft_kiota_serialization_json', '~> 0.9.0'
   spec.add_runtime_dependency 'microsoft_kiota_authentication_oauth', '~> 0.8.0'
   spec.add_development_dependency 'rake', '~> 13.0'
